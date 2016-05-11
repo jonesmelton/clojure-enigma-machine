@@ -2,6 +2,10 @@
   (:gen-class))
 
 (defn -main
-  "I don't do a whole lot ... yet."
   [& args]
-  (println "Hello, World!"))
+
+  (def rotor-1 "EKMFLGDQVZNTOWYHXUSPAIBRCJ")
+  (def rotor-2 "AJDKSIRUXBLHWTMCQGZNPYFVOE")
+  (def rotor-3 "BDFHJLCPRTXVZNYEIWGAKMUSQO")
+
+)
