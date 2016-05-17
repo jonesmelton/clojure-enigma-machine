@@ -3,6 +3,7 @@
 
 
   (def alphabet  "ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+  (def raw-alphabet (seq alphabet))
 
   (def disc-1   "EKMFLGDQVZNTOWYHXUSPAIBRCJ")
   (def disc-2   "AJDKSIRUXBLHWTMCQGZNPYFVOE")
@@ -23,39 +24,23 @@
      :wheel (rotate-wheel (rotor :wheel)),
      :notch (rotor :notch)})
 
-(rotate-rotor right-rotor)
-
-
-
-;;   (defn rotate-wheel [rotor]
-;;     (println (concat (rest (rotor :wheel)) [(first (rotor :wheel))]))
-;;     (println (concat (rest (rotor :alphabet)) [(first (rotor :alphabet))]))
-;;     "poop")
-
   (defn index-of [char wheel]
     (.indexOf wheel char))
 
   (defn char-at [index wheel]
     (nth wheel index))
 
-(defn -main
-  [& rest]
-  (def wheel-1 (disc-into-wheel rotor-1))
-  (println (char-at 4 wheel-1))
-
-)
 
 (def right-rotor {:alphabet (disc-into-wheel alphabet),
-                :wheel (disc-into-wheel rotor-1),
+                :wheel (disc-into-wheel disc-1),
                 :notch \V} )
 ;; right-rotor
 
-;; (defn translate-char
-;;   [char rotor]
-;;   (if (= :notch (first :alphabet))
-;;     )
-;; )
-;; (translate-char \V )
+(defn translate-letter [char rotor]
+  (index-of (char-at (index-of char raw-alphabet) (rotor :wheel)) (rotor :alphabet)))
 
-(= "poop" (rotate-wheel right-rotor))
 
+(defn -main
+  [& rest]
+  (println (translate-letter \A right-rotor))
+)

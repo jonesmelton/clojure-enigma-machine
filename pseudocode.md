@@ -25,3 +25,10 @@ Fn to rotate a rotar ; may be called in different circumstances.
 Fn to determine if rotar should be rotated.
 
 '("ABCDEFGH...")
+
+ROTOR HOW
+
+1 rotate rotor
+2 get index of letter in raw alphabet
+3 get letter at that index on rotor wheel
+4 get index of that letter on rotor alphabet
