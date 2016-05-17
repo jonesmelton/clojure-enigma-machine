@@ -32,3 +32,14 @@ ROTOR HOW
 2 get index of letter in raw alphabet
 3 get letter at that index on rotor wheel
 4 get index of that letter on rotor alphabet
+
+SET-ROTOR WHY.
+
+0. input: character and rotor
+1. get index of character in ALPHABET
+2. TAKE index (number of elements) from beginning of list
+    and concat them on to the end.
+3.
+
+n. output: rotor
+
