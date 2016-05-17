@@ -23,8 +23,7 @@
      :wheel (rotate-wheel (rotor :wheel)),
      :notch (rotor :notch)})
 
-(rotate-rotor right-rotor)
-
+  (rotate-rotor right-rotor)
 
 
 ;;   (defn rotate-wheel [rotor]
@@ -46,7 +45,7 @@
 )
 
 (def right-rotor {:alphabet (disc-into-wheel alphabet),
-                :wheel (disc-into-wheel rotor-1),
+                :wheel (disc-into-wheel disc-1),
                 :notch \V} )
 ;; right-rotor
 
