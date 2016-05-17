@@ -24,6 +24,8 @@
      :wheel (rotate-wheel (rotor :wheel)),
      :notch (rotor :notch)})
 
+(rotate-rotor right-rotor)
+
   (defn index-of [char wheel]
     (.indexOf wheel char))
 
@@ -32,15 +34,29 @@
 
 
 (def right-rotor {:alphabet (disc-into-wheel alphabet),
-                :wheel (disc-into-wheel disc-1),
+                :wheel (disc-into-wheel disc-3),
                 :notch \V} )
 ;; right-rotor
 
 (defn translate-letter [char rotor]
-  (index-of (char-at (index-of char raw-alphabet) (rotor :wheel)) (rotor :alphabet)))
+  (index-of
+    (char-at
+      (index-of char raw-alphabet)
+      (rotor :wheel))
+    (rotor :alphabet)))
 
 
 (defn -main
   [& rest]
   (println (translate-letter \A right-rotor))
 )
+
+(translate-letter \A right-rotor)
+
+(index-of \A raw-alphabet)
+(char-at 0 (right-rotor :wheel))
+(index-of \B (right-rotor :alphabet))
+
+(index-of \G raw-alphabet)
+(char-at 6 (right-rotor :wheel))
+(index-of \C (right-rotor :alphabet))
