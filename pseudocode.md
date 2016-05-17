@@ -5,6 +5,7 @@ input: string
 3. then we'll need a fn that, we give it an index and it makes that be the first item in the list
 4.
 
+character into another character
 
 Concerns:
 - How to save state between rotars? (!!!)
