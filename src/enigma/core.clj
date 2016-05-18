@@ -19,5 +19,5 @@
 
 (defn -main
   [& rest]
-  (println (translate-letter \A right-rotor))
+  (println (rotate-wheel raw-alphabet))
 )
