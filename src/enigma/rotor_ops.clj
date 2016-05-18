@@ -15,5 +15,6 @@
   (loop [char char
         rotor rotor])
           (if (= (first (rotor :alphabet)) char)
-          (rotor)
+          rotor
           (recur char (rotate-rotor rotor))))
+
