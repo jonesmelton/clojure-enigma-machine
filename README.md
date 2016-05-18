@@ -1,40 +1,6 @@
 
 # enigma
 
-FIXME: description
+This is a simulator of the enigma encryption machine. It was done as a learning project for functional programming and Clojure.
 
-## Installation
-
-Download from http://example.com/FIXME.
-
-## Usage
-
-FIXME: explanation
-
-    $ java -jar enigma-0.1.0-standalone.jar [args]
-
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
-
-## License
-
-Copyright © 2016 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
-
-# clojure-enigma-machine
-An enigma emulator in clojure
+The contributors are Eric Tenza (@tenzaej) and Jones Melton (@shavah).
