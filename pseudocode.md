@@ -43,3 +43,26 @@ SET-ROTOR WHY.
 
 n. output: rotor
 
+possible -main workings:
+(defn main thing
+  let right rotor
+  loop [string
+        blah blah blah]
+    rotate right rotor
+  if...
+  recur
+
+right-to-left
+input: character
+
+1. input a character
+2. ground all three rotors
+
+output: index
+
+ground-all
+
+input: three rotors (hard-code in three characters)
+output: vector of three grounded rotors
+
+1. input three rotors
