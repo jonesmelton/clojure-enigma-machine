@@ -17,4 +17,3 @@
           (if (= (first (rotor :alphabet)) char)
           rotor
           (recur char (rotate-rotor rotor))))
-
