@@ -17,3 +17,10 @@
           (if (= (first (rotor :alphabet)) char)
           rotor
           (recur char (rotate-rotor rotor))))
+
+(defn ground-all
+  "Sets the ground for all three rotors; right, center, left"
+  [rotor-vector]
+  [(set-ground \K (rotor-vector 0)),
+   (set-ground \C (rotor-vector 1)),
+   (set-ground \M (rotor-vector 2))])

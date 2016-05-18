@@ -12,6 +12,16 @@
 (def right-rotor {:alphabet (disc-into-wheel alphabet),
                 :wheel (disc-into-wheel disc-3),
                 :notch \V} )
+
+(def center-rotor {:alphabet (disc-into-wheel alphabet),
+                :wheel (disc-into-wheel disc-2),
+                :notch \C} )
+
+(def left-rotor {:alphabet (disc-into-wheel alphabet),
+                :wheel (disc-into-wheel disc-1),
+                :notch \M} )
+
+
 ;; right-rotor
 
 (defn translate-letter [char rotor]
@@ -21,3 +31,8 @@
   [& rest]
   (println (rotate-wheel raw-alphabet))
 )
+
+(defn right-to-left
+  "Inputs a character and moves up to the reflector"
+  [char]
+  )

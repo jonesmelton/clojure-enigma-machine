@@ -23,3 +23,11 @@
 (deftest grounding
   (testing "set-ground rotates to the given character"
     (is (= \K (first ((set-ground \K right-rotor) :alphabet))))))
+
+(deftest ground-all-the-rotors
+  (testing "sets the ground for all three rotors"
+    (is (= [\K \C \M] (map first (map :alphabet (ground-all [right-rotor center-rotor left-rotor])))))))
+
+(deftest chaining-rotors
+  (testing "traverses the rotors from one side to the other"
+    (is (= 19 (right-to-left \B)))))
