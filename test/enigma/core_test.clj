@@ -19,4 +19,4 @@
 
 (deftest grounding
   (testing "set-ground rotates to the given character"
-    (is (= \B (first ((set-ground \B right-rotor) :alphabet))))))
+    (is (= \K (first ((set-ground \K right-rotor) :alphabet))))))

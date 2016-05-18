@@ -12,6 +12,8 @@
    :notch (rotor :notch)})
 
 (defn set-ground [char rotor]
-  (if (= (rotor :alphabet) char)
-  (rotor)
-  (rotate-rotor rotor)))
+  (loop [char char
+        rotor rotor])
+          (if (= (first (rotor :alphabet)) char)
+          (rotor)
+          (recur char (rotate-rotor rotor))))
