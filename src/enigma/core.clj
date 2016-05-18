@@ -24,15 +24,24 @@
 
 ;; right-rotor
 
+; letter -> index
 (defn translate-letter [char rotor]
   (index-of (char-at (index-of char raw-alphabet) (rotor :wheel)) (rotor :alphabet)))
 
-(defn -main
-  [& rest]
-  (println (rotate-wheel raw-alphabet))
-)
+; index -> index
+(defn translate-index [index rotor]
+  (index-of (char-at index (rotor :wheel)) (rotor :alphabet)))
 
+(def all-rotors
+  (ground-all [right-rotor center-rotor left-rotor]))
+
+; letter -> index
 (defn right-to-left
   "Inputs a character and moves up to the reflector"
   [char]
+  (translate-index (translate-index (translate-letter char (all-rotors 0)) (all-rotors 1)) (all-rotors 2)))
+
+(defn -main
+  [& rest]
+  (println (right-to-left \B))
   )
