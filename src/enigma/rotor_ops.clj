@@ -10,3 +10,8 @@
   {:alphabet (rotate-wheel (rotor :alphabet)),
    :wheel (rotate-wheel (rotor :wheel)),
    :notch (rotor :notch)})
+
+(defn set-ground [char rotor]
+  (if (= (rotor :alphabet) char)
+  (rotor)
+  (rotate-rotor rotor)))

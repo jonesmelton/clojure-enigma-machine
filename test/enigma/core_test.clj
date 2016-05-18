@@ -15,4 +15,8 @@
 
 (deftest rotor-functions
   (testing "rotate actually rotates"
-    (is (= '(\B \C \D \E \F \G \H \I \J \K \L \M \N \O \P \Q \R \S \T \U \V \W \X \Y \Z \A) (rotate-wheel raw-alphabet) ))))
+    (is (= '(\B \C \D \E \F \G \H \I \J \K \L \M \N \O \P \Q \R \S \T \U \V \W \X \Y \Z \A) (rotate-wheel raw-alphabet)))))
+
+(deftest grounding
+  (testing "set-ground rotates to the given character"
+    (is (= \B (first ((set-ground \B right-rotor) :alphabet))))))
