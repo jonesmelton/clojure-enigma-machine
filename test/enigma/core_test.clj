@@ -31,3 +31,7 @@
 (deftest chaining-rotors
   (testing "traverses the rotors from one side to the other"
     (is (= 19 (right-to-left \B)))))
+
+(deftest reflecting
+  (testing "reflects the correct index"
+    (is (= 20 (reflect 2)))))

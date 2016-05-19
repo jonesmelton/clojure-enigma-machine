@@ -41,6 +41,11 @@
   [char]
   (translate-index (translate-index (translate-letter char (all-rotors 0)) (all-rotors 1)) (all-rotors 2)))
 
+; index -> index
+(defn reflect
+  [index]
+  (index-of index reflector))
+
 (defn -main
   [& rest]
   (println (right-to-left \B))
