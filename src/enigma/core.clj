@@ -60,7 +60,7 @@
 
 (defn single-lap [char]
   (swap! rotors-vector ground-all)
-  (left-to-right (reflect (right-to-left \E @rotors-vector)) @rotors-vector))
+  (left-to-right (reflect (right-to-left char @rotors-vector)) @rotors-vector))
 
 (defn -main
   [& rest]
