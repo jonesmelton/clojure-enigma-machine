@@ -38,14 +38,14 @@
 
 
 
-(def all-rotors
-  (ground-all [right-rotor center-rotor left-rotor]))
+; (def all-rotors
+;   (ground-all [right-rotor center-rotor left-rotor]))
 
 ; letter -> index
 (defn right-to-left
   "Inputs a character and moves up to the reflector"
-  [char]
-  (translate-index (translate-index (translate-letter char (all-rotors 0)) (all-rotors 1)) (all-rotors 2)))
+  [char rotors]
+  (translate-index (translate-index (translate-letter char (rotors 0)) (rotors 1)) (rotors 2)))
 
 ; index -> index
 (defn reflect
@@ -54,10 +54,8 @@
 
 ; index -> character
 (defn left-to-right
-  [index]
-  (char-at (translate-r (translate-r (translate-r index (all-rotors 2)) (all-rotors 1)) (all-rotors 0)) raw-alphabet))
-
-(translate-index 20 (all-rotors 2))
+  [index rotors]
+  (char-at (translate-r (translate-r (translate-r index (rotors 2)) (rotors 1)) (rotors 0)) raw-alphabet))
 
 (defn -main
   [& rest]

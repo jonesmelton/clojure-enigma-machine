@@ -30,10 +30,10 @@
 
 (deftest chaining-rotors
   (testing "traverses the rotors from right to left"
-    (is (= 19 (right-to-left \B))))
+    (is (= 19 (right-to-left \B (ground-all [right-rotor center-rotor left-rotor])))))
 
   (testing "traverses the rotors from left to right"
-    (is (= \S (left-to-right 20)))))
+    (is (= \S (left-to-right 20 (ground-all [right-rotor center-rotor left-rotor]))))))
 
 (deftest reflecting
   (testing "reflects the correct index"
