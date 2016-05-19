@@ -3,11 +3,11 @@
             [enigma.rotor-ops :refer :all])
   (:gen-class))
 
-  (defn index-of [char wheel]
-    (.indexOf wheel char))
+(defn index-of [char wheel]
+  (.indexOf wheel char))
 
-  (defn char-at [index wheel]
-    (nth wheel index))
+(defn char-at [index wheel]
+  (nth wheel index))
 
 (def right-rotor {:alphabet (disc-into-wheel alphabet),
                 :wheel (disc-into-wheel disc-3),
@@ -32,6 +32,12 @@
 (defn translate-index [index rotor]
   (index-of (char-at index (rotor :wheel)) (rotor :alphabet)))
 
+; index <- index
+(defn translate-r [index rotor]
+  (index-of (char-at index (rotor :alphabet)) (rotor :wheel)))
+
+
+
 (def all-rotors
   (ground-all [right-rotor center-rotor left-rotor]))
 
@@ -45,6 +51,13 @@
 (defn reflect
   [index]
   (index-of index reflector))
+
+; index -> character
+(defn left-to-right
+  [index]
+  (char-at (translate-r (translate-r (translate-r index (all-rotors 2)) (all-rotors 1)) (all-rotors 0)) raw-alphabet))
+
+(translate-index 20 (all-rotors 2))
 
 (defn -main
   [& rest]
