@@ -38,6 +38,7 @@
 
 (def rotors-vector (atom [right-rotor center-rotor left-rotor]))
 
+(swap! rotors-vector ground-all)
 
 ; (def all-rotors
 ;   (ground-all [right-rotor center-rotor left-rotor]))
@@ -59,10 +60,19 @@
   (char-at (translate-r (translate-r (translate-r index (rotors 2)) (rotors 1)) (rotors 0)) raw-alphabet))
 
 (defn single-lap [char]
-  (swap! rotors-vector ground-all)
+;  (swap! rotors-vector ground-all)
   (left-to-right (reflect (right-to-left char @rotors-vector)) @rotors-vector))
+
+(defn multiple-laps [string]
+  (loop [remaining-letters  string
+         encoded-letters    []    ]
+    (if-not (seq remaining-letters)
+      (apply str encoded-letters)
+      (let [[first & rest] remaining-letters]
+        (recur rest (conj encoded-letters (single-lap first)))))))
 
 (defn -main
   [& rest]
   (println (right-to-left \B))
   )
+

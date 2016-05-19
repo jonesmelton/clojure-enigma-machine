@@ -42,3 +42,7 @@
 (deftest full-translate-letter
   (testing "translates one letter through all the rotors and back"
     (is (= \Q (single-lap \E)))))
+
+(deftest full-translate-string
+  (testing "encodes a string"
+    (is (= "QQQ" (multiple-laps "EEE")))))
