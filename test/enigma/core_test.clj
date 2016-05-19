@@ -38,3 +38,7 @@
 (deftest reflecting
   (testing "reflects the correct index"
     (is (= 20 (reflect 2)))))
+
+(deftest full-translate-letter
+  (testing "translates one letter through all the rotors and back"
+    (is (= \Q (single-lap \E)))))

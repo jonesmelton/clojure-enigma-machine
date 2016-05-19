@@ -36,7 +36,11 @@
 (defn translate-r [index rotor]
   (index-of (char-at index (rotor :alphabet)) (rotor :wheel)))
 
+(def rotors-vector [right-rotor center-rotor left-rotor])
 
+(defn single-lap [char]
+  (right-to-left \E (ground-all rotors-vector))
+)
 
 ; (def all-rotors
 ;   (ground-all [right-rotor center-rotor left-rotor]))
