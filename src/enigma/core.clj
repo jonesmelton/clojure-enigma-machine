@@ -3,11 +3,11 @@
             [enigma.rotor-ops :refer :all])
   (:gen-class))
 
-  (defn index-of [char wheel]
-    (.indexOf wheel char))
+(defn index-of [char wheel]
+  (.indexOf wheel char))
 
-  (defn char-at [index wheel]
-    (nth wheel index))
+(defn char-at [index wheel]
+  (nth wheel index))
 
 (def right-rotor {:alphabet (disc-into-wheel alphabet),
                 :wheel (disc-into-wheel disc-3),
@@ -32,16 +32,47 @@
 (defn translate-index [index rotor]
   (index-of (char-at index (rotor :wheel)) (rotor :alphabet)))
 
-(def all-rotors
-  (ground-all [right-rotor center-rotor left-rotor]))
+; index <- index
+(defn translate-r [index rotor]
+  (index-of (char-at index (rotor :alphabet)) (rotor :wheel)))
+
+(def rotors-vector (atom [right-rotor center-rotor left-rotor]))
+
+(swap! rotors-vector ground-all)
+
+; (def all-rotors
+;   (ground-all [right-rotor center-rotor left-rotor]))
 
 ; letter -> index
 (defn right-to-left
   "Inputs a character and moves up to the reflector"
-  [char]
-  (translate-index (translate-index (translate-letter char (all-rotors 0)) (all-rotors 1)) (all-rotors 2)))
+  [char rotors]
+  (translate-index (translate-index (translate-letter char (rotors 0)) (rotors 1)) (rotors 2)))
+
+; index -> index
+(defn reflect
+  [index]
+  (index-of index reflector))
+
+; index -> character
+(defn left-to-right
+  [index rotors]
+  (char-at (translate-r (translate-r (translate-r index (rotors 2)) (rotors 1)) (rotors 0)) raw-alphabet))
+
+(defn single-lap [char]
+;  (swap! rotors-vector ground-all)
+  (left-to-right (reflect (right-to-left char @rotors-vector)) @rotors-vector))
+
+(defn multiple-laps [string]
+  (loop [remaining-letters  string
+         encoded-letters    []    ]
+    (if-not (seq remaining-letters)
+      (apply str encoded-letters)
+      (let [[first & rest] remaining-letters]
+        (recur rest (conj encoded-letters (single-lap first)))))))
 
 (defn -main
   [& rest]
   (println (right-to-left \B))
   )
+

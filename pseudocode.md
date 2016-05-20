@@ -66,3 +66,15 @@ input: three rotors (hard-code in three characters)
 output: vector of three grounded rotors
 
 1. input three rotors
+
+multiple letters
+i: string, o: string
+1. string to seq
+2. ground the rotors
+3. loop over string seq
+    IF empty
+      return accumulator
+    ELSE
+      translate first
+      add to accumulator
+      recur with rest
