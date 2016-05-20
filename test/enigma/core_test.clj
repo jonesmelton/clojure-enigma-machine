@@ -18,7 +18,10 @@
     (is (= '(\B \C \D \E \F \G \H \I \J \K \L \M \N \O \P \Q \R \S \T \U \V \W \X \Y \Z \A) (rotate-wheel raw-alphabet))))
 
   (testing "sets ground and translates"
-    (is (= 2 (translate-letter \L (set-ground \K right-rotor))))))
+    (is (= 2 (translate-letter \L (set-ground \K right-rotor)))))
+
+  (testing "rotates the rightmost rotor at the beginning of every iteration"
+    (is (not= "QQ" (multiple-laps "EE")))))
 
 (deftest grounding
   (testing "set-ground rotates to the given character"
