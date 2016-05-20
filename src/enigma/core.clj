@@ -73,6 +73,5 @@
 
 (defn -main
   [& rest]
-  (println (right-to-left \B))
+  (println (multiple-laps (clojure.string/upper-case (apply str rest))))
   )
-
