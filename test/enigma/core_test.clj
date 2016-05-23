@@ -53,4 +53,7 @@
 
 (deftest stepping-helpers
   (testing "rotate? returns false if rotor shouldn't rotate"
-    (is (= false (rotate? right-rotor)))))
+    (is (= false (rotate? right-rotor))))
+
+  (testing "rotate? returns true if rotor should rotate"
+    (is (= true (rotate? (set-ground \V right-rotor))))))

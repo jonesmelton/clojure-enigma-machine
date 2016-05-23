@@ -59,7 +59,7 @@
   (left-to-right (reflect (right-to-left char rotors-vector)) rotors-vector))
 
 (defn rotate? [rotor]
-  (if (= (first rotor) (rotor :notch))
+  (if (= (first (rotor :alphabet)) (rotor :notch))
     true
     false))
 
