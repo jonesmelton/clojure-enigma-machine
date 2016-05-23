@@ -49,11 +49,14 @@
 
 (deftest full-translate-string
   (testing "encodes a string"
-    (is (= "QQQ" (multiple-laps "EEE")))))
+    (is (= "OXRSFVU" (multiple-laps "ITWORKS" rotors-vector)))))
 
 (deftest stepping-helpers
   (testing "rotate? returns false if rotor shouldn't rotate"
     (is (= false (rotate? right-rotor))))
 
   (testing "rotate? returns true if rotor should rotate"
-    (is (= true (rotate? (set-ground \V right-rotor))))))
+    (is (= true (rotate? (set-ground \V right-rotor)))))
+
+  (testing "step steps"
+    (is (= \B (first (:alphabet ((step [right-rotor (set-ground \E center-rotor) left-rotor]) 2)))))))
