@@ -75,3 +75,4 @@
   [& rest]
   (println (multiple-laps (clojure.string/upper-case (apply str rest))))
   )
+
