@@ -18,7 +18,11 @@
     (is (= '(\B \C \D \E \F \G \H \I \J \K \L \M \N \O \P \Q \R \S \T \U \V \W \X \Y \Z \A) (rotate-wheel raw-alphabet))))
 
   (testing "sets ground and translates"
-    (is (= 2 (translate-letter \L (set-ground \K right-rotor))))))
+    (is (= 2 (translate-letter \L (set-ground \K right-rotor)))))
+
+;;   (testing "rotates the rightmost rotor at the beginning of every iteration"
+;;     (is (not= "QQ" (multiple-laps "EE"))))
+  )
 
 (deftest grounding
   (testing "set-ground rotates to the given character"
@@ -41,8 +45,15 @@
 
 (deftest full-translate-letter
   (testing "translates one letter through all the rotors and back"
-    (is (= \Q (single-lap \E)))))
+    (is (= \Q (single-lap \E rotors-vector)))))
 
 (deftest full-translate-string
   (testing "encodes a string"
     (is (= "QQQ" (multiple-laps "EEE")))))
+
+(deftest stepping-helpers
+  (testing "rotate? returns false if rotor shouldn't rotate"
+    (is (= false (rotate? right-rotor))))
+
+  (testing "rotate? returns true if rotor should rotate"
+    (is (= true (rotate? (set-ground \V right-rotor))))))
