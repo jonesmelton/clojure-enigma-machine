@@ -36,12 +36,8 @@
 (defn translate-r [index rotor]
   (index-of (char-at index (rotor :alphabet)) (rotor :wheel)))
 
-(def rotors-vector (atom [right-rotor center-rotor left-rotor]))
-
-(swap! rotors-vector ground-all)
-
-; (def all-rotors
-;   (ground-all [right-rotor center-rotor left-rotor]))
+(def rotors-vector
+ (ground-all [right-rotor center-rotor left-rotor]))
 
 ; letter -> index
 (defn right-to-left
@@ -61,7 +57,7 @@
 
 (defn single-lap [char]
 ;  (swap! rotors-vector ground-all)
-  (left-to-right (reflect (right-to-left char @rotors-vector)) @rotors-vector))
+  (left-to-right (reflect (right-to-left char rotors-vector)) rotors-vector))
 
 (defn multiple-laps [string]
   (loop [remaining-letters  string
