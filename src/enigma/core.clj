@@ -40,10 +40,6 @@
 
 (swap! rotors-vector ground-all)
 
-(swap! rotors-vector rotate-rotor rotors-vector)
-
-rotors-vector
-
 ; (def all-rotors
 ;   (ground-all [right-rotor center-rotor left-rotor]))
 
@@ -66,9 +62,6 @@ rotors-vector
 (defn single-lap [char]
 ;  (swap! rotors-vector ground-all)
   (left-to-right (reflect (right-to-left char @rotors-vector)) @rotors-vector))
-
-(defn single-circuit [char]
-  (left-to-right (reflect (right-to-left char (swap! rotors-vector rotate-rotor))
 
 (defn multiple-laps [string]
   (loop [remaining-letters  string
