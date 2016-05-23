@@ -1,3 +1,5 @@
+;; passing all tests; no atom functionality.
+
 (ns enigma.core
   (:require [enigma.static-parts :refer :all]
             [enigma.rotor-ops :refer :all])
@@ -15,11 +17,11 @@
 
 (def center-rotor {:alphabet (disc-into-wheel alphabet),
                 :wheel (disc-into-wheel disc-2),
-                :notch \E} )
+                :notch \C} )
 
 (def left-rotor {:alphabet (disc-into-wheel alphabet),
                 :wheel (disc-into-wheel disc-1),
-                :notch \Q} )
+                :notch \M} )
 
 
 ;; right-rotor
@@ -36,8 +38,12 @@
 (defn translate-r [index rotor]
   (index-of (char-at index (rotor :alphabet)) (rotor :wheel)))
 
-(def rotors-vector
- (ground-all [right-rotor center-rotor left-rotor]))
+(def rotors-vector (atom [right-rotor center-rotor left-rotor]))
+
+(swap! rotors-vector ground-all)
+
+; (def all-rotors
+;   (ground-all [right-rotor center-rotor left-rotor]))
 
 ; letter -> index
 (defn right-to-left
@@ -55,40 +61,19 @@
   [index rotors]
   (char-at (translate-r (translate-r (translate-r index (rotors 2)) (rotors 1)) (rotors 0)) raw-alphabet))
 
-(defn single-lap [char rotors-vector]
-  (left-to-right (reflect (right-to-left char rotors-vector)) rotors-vector))
-
-(defn rotate? [rotor]
-  (if (= (first (rotor :alphabet)) (rotor :notch))
-    true
-    false))
-
-(defn step-center [rotors]
-  (if (rotate? (rotors 0))
-    (rotate-rotor (rotors 1))
-    (rotors 1)))
-
-(defn step-left [rotors]
-  (if (rotate? (rotors 1))
-    (rotate-rotor (rotors 2))
-    (rotors 2)))
-
-(defn step-right [rotors]
-  (rotate-rotor (rotors 0)))
-
-(defn step [rotors]
-  [(step-right rotors) (step-center rotors) (step-left rotors)])
+(defn single-lap [char]
+;  (swap! rotors-vector ground-all)
+  (left-to-right (reflect (right-to-left char @rotors-vector)) @rotors-vector))
 
 (defn multiple-laps [string]
   (loop [remaining-letters  string
          encoded-letters    []    ]
     (if-not (seq remaining-letters)
       (apply str encoded-letters)
-      (let [[first-char & rest] remaining-letters]
-        (recur rest (conj encoded-letters (single-lap first-char rotors-vector)))))))
+      (let [[first & rest] remaining-letters]
+        (recur rest (conj encoded-letters (single-lap first)))))))
 
 (defn -main
   [& rest]
   (println (multiple-laps (clojure.string/upper-case (apply str rest))))
   )
-
