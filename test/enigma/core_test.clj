@@ -49,7 +49,7 @@
 
 (deftest full-translate-string
   (testing "encodes a string"
-    (is (= "QQQ" (multiple-laps "EEE")))))
+    (is (= "OXRSFVU" (multiple-laps "ITWORKS" rotors-vector)))))
 
 (deftest stepping-helpers
   (testing "rotate? returns false if rotor shouldn't rotate"

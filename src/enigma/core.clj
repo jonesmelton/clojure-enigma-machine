@@ -79,16 +79,17 @@
 (defn step [rotors]
   [(step-right rotors) (step-center rotors) (step-left rotors)])
 
-(defn multiple-laps [string]
+(defn multiple-laps [string rotatoes]
   (loop [remaining-letters  string
-         encoded-letters    []    ]
+         encoded-letters    []
+         rotors             (step rotatoes)]
     (if-not (seq remaining-letters)
       (apply str encoded-letters)
       (let [[first-char & rest] remaining-letters]
-        (recur rest (conj encoded-letters (single-lap first-char rotors-vector)))))))
+        (recur rest (conj encoded-letters (single-lap first-char rotors)) (step rotors))))))
 
 (defn -main
   [& rest]
-  (println (multiple-laps (clojure.string/upper-case (apply str rest))))
+  (println (multiple-laps (clojure.string/upper-case (apply str rest)) rotors-vector ))
   )
 
