@@ -55,17 +55,21 @@
   [index rotors]
   (char-at (translate-r (translate-r (translate-r index (rotors 2)) (rotors 1)) (rotors 0)) raw-alphabet))
 
-(defn single-lap [char]
-;  (swap! rotors-vector ground-all)
+(defn single-lap [char rotors-vector]
   (left-to-right (reflect (right-to-left char rotors-vector)) rotors-vector))
+
+(defn rotate? [rotor]
+  (if (= (first rotor) (rotor :notch))
+    true
+    false))
 
 (defn multiple-laps [string]
   (loop [remaining-letters  string
          encoded-letters    []    ]
     (if-not (seq remaining-letters)
       (apply str encoded-letters)
-      (let [[first & rest] remaining-letters]
-        (recur rest (conj encoded-letters (single-lap first)))))))
+      (let [[first-char & rest] remaining-letters]
+        (recur rest (conj encoded-letters (single-lap first-char rotors-vector)))))))
 
 (defn -main
   [& rest]

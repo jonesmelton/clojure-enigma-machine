@@ -45,8 +45,12 @@
 
 (deftest full-translate-letter
   (testing "translates one letter through all the rotors and back"
-    (is (= \Q (single-lap \E)))))
+    (is (= \Q (single-lap \E rotors-vector)))))
 
 (deftest full-translate-string
   (testing "encodes a string"
     (is (= "QQQ" (multiple-laps "EEE")))))
+
+(deftest stepping-helpers
+  (testing "rotate? returns false if rotor shouldn't rotate"
+    (is (= false (rotate? right-rotor)))))
