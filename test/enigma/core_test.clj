@@ -2,7 +2,8 @@
   (:require [clojure.test :refer :all]
             [enigma.core :refer :all]
             [enigma.static-parts :refer :all]
-            [enigma.rotor-ops :refer :all]))
+            [enigma.rotor-ops :refer :all]
+            [enigma.input-output :refer :all]))
 
 
 
