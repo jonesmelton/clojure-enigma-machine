@@ -63,10 +63,15 @@
     true
     false))
 
+(defn double-step-center [rotor]
+  (if (rotate? rotor)
+    (rotate-rotor rotor)
+    rotor))
+
 (defn step-center [rotors]
   (if (rotate? (rotors 0))
     (rotate-rotor (rotors 1))
-    (rotors 1)))
+    (double-step-center (rotors 1))))
 
 (defn step-left [rotors]
   (if (rotate? (rotors 1))
@@ -92,4 +97,3 @@
   [& rest]
   (println (multiple-laps (clojure.string/upper-case (apply str rest)) rotors-vector ))
   )
-

@@ -59,4 +59,7 @@
     (is (= true (rotate? (set-ground \V right-rotor)))))
 
   (testing "step steps"
-    (is (= \B (first (:alphabet ((step [right-rotor (set-ground \E center-rotor) left-rotor]) 2)))))))
+    (is (= \B (first (:alphabet ((step [right-rotor (set-ground \E center-rotor) left-rotor]) 2))))))
+
+  (testing "double-steps"
+    (is (= "TBGWIXNYEIVLWOQZHRSEPXXRLDIBYHISMXLMYJC" (multiple-laps "ASDFASDFASDFASDFASDFASDFASDFSDFDSFSDFFF" rotors-vector)))))
