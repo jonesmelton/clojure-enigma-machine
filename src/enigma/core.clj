@@ -1,19 +1,18 @@
 (ns enigma.core
-  (:require [enigma.static-parts :refer :all]
-            [enigma.rotor-ops :refer :all]
-            [enigma.input-output :refer :all])
+  (:require [enigma.static-parts :as parts]
+            [enigma.input-output :as translate])
   (:gen-class))
 
 (defn translate-string [string rotatoes]
   (loop [remaining-letters  string
          encoded-letters    []
-         rotors             (step rotatoes)]
+         rotors             (translate/step rotatoes)]
     (if-not (seq remaining-letters)
       (apply str encoded-letters)
       (let [[first-char & rest] remaining-letters]
-        (recur rest (conj encoded-letters (single-lap first-char rotors)) (step rotors))))))
+        (recur rest (conj encoded-letters (translate/single-lap first-char rotors)) (translate/step rotors))))))
 
 (defn -main
   [& rest]
-  (println (translate-string (clojure.string/upper-case (apply str rest)) grounded-rotors ))
+  (println (translate-string (clojure.string/upper-case (apply str rest)) parts/grounded-rotors ))
   )
