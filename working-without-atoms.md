@@ -31,16 +31,16 @@
   (index-of (char-at (index-of char raw-alphabet) (rotor :wheel)) (rotor :alphabet)))
 
 ; index -> index
-(defn translate-index [index rotor]
+(defn translate-l [index rotor]
   (index-of (char-at index (rotor :wheel)) (rotor :alphabet)))
 
 ; index <- index
 (defn translate-r [index rotor]
   (index-of (char-at index (rotor :alphabet)) (rotor :wheel)))
 
-(def rotors-vector (atom [right-rotor center-rotor left-rotor]))
+(def grounded-rotors (atom [right-rotor center-rotor left-rotor]))
 
-(swap! rotors-vector ground-all)
+(swap! grounded-rotors ground-all)
 
 ; (def all-rotors
 ;   (ground-all [right-rotor center-rotor left-rotor]))
@@ -49,7 +49,7 @@
 (defn right-to-left
   "Inputs a character and moves up to the reflector"
   [char rotors]
-  (translate-index (translate-index (translate-letter char (rotors 0)) (rotors 1)) (rotors 2)))
+  (translate-l (translate-l (translate-letter char (rotors 0)) (rotors 1)) (rotors 2)))
 
 ; index -> index
 (defn reflect
@@ -62,10 +62,10 @@
   (char-at (translate-r (translate-r (translate-r index (rotors 2)) (rotors 1)) (rotors 0)) raw-alphabet))
 
 (defn single-lap [char]
-;  (swap! rotors-vector ground-all)
-  (left-to-right (reflect (right-to-left char @rotors-vector)) @rotors-vector))
+;  (swap! grounded-rotors ground-all)
+  (left-to-right (reflect (right-to-left char @grounded-rotors)) @grounded-rotors))
 
-(defn multiple-laps [string]
+(defn translate-string [string]
   (loop [remaining-letters  string
          encoded-letters    []    ]
     (if-not (seq remaining-letters)
@@ -75,5 +75,5 @@
 
 (defn -main
   [& rest]
-  (println (multiple-laps (clojure.string/upper-case (apply str rest))))
+  (println (translate-string (clojure.string/upper-case (apply str rest))))
   )
