@@ -2,7 +2,8 @@
   (:require [clojure.test :refer :all]
             [enigma.core :refer :all]
             [enigma.static-parts :refer :all]
-            [enigma.rotor-ops :refer :all]))
+            [enigma.rotor-ops :refer :all]
+            [enigma.input-output :refer :all]))
 
 
 
@@ -21,7 +22,7 @@
     (is (= 2 (translate-letter \L (set-ground \K right-rotor)))))
 
 ;;   (testing "rotates the rightmost rotor at the beginning of every iteration"
-;;     (is (not= "QQ" (multiple-laps "EE"))))
+;;     (is (not= "QQ" (translate-string "EE"))))
   )
 
 (deftest grounding
@@ -45,11 +46,11 @@
 
 (deftest full-translate-letter
   (testing "translates one letter through all the rotors and back"
-    (is (= \Q (single-lap \E rotors-vector)))))
+    (is (= \Q (single-lap \E grounded-rotors)))))
 
 (deftest full-translate-string
   (testing "encodes a string"
-    (is (= "OXRSFVU" (multiple-laps "ITWORKS" rotors-vector)))))
+    (is (= "OXRSFVU" (translate-string "ITWORKS" grounded-rotors)))))
 
 (deftest stepping-helpers
   (testing "rotate? returns false if rotor shouldn't rotate"
@@ -62,4 +63,4 @@
     (is (= \B (first (:alphabet ((step [right-rotor (set-ground \E center-rotor) left-rotor]) 2))))))
 
   (testing "double-steps"
-    (is (= "TBGWIXNYEIVLWOQZHRSEPXXRLDIBYHISMXLMYJC" (multiple-laps "ASDFASDFASDFASDFASDFASDFASDFSDFDSFSDFFF" rotors-vector)))))
+    (is (= "TBGWIXNYEIVLWOQZHRSEPXXRLDIBYHISMXLMYJC" (translate-string "ASDFASDFASDFASDFASDFASDFASDFSDFDSFSDFFF" grounded-rotors)))))
