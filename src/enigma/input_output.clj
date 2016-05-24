@@ -40,9 +40,7 @@
   (left-to-right (reflect (right-to-left char grounded-rotors)) grounded-rotors))
 
 (defn rotate? [rotor]
-  (if (= (first (rotor :alphabet)) (rotor :notch))
-    true
-    false))
+  (= (first (rotor :alphabet)) (rotor :notch)))
 
 (defn double-step-center [rotor]
   (if (rotate? rotor)
