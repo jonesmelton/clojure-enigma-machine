@@ -1,5 +1,5 @@
 (ns enigma.input-output
-  (:require [enigma.static-parts :refer :all]
+  (:require [enigma.static-parts :as parts]
             [enigma.rotor-ops :refer :all]))
 
 (defn index-of [char wheel]
@@ -10,7 +10,7 @@
 
 ; letter -> index
 (defn translate-letter [char rotor]
-  (index-of (char-at (index-of char raw-alphabet) (rotor :wheel)) (rotor :alphabet)))
+  (index-of (char-at (index-of char parts/raw-alphabet) (rotor :wheel)) (rotor :alphabet)))
 
 ; index -> index
 (defn translate-l [index rotor]
@@ -29,18 +29,19 @@
 ; index -> index
 (defn reflect
   [index]
-  (index-of index reflector))
+  (index-of index parts/reflector))
 
 ; index -> character
 (defn left-to-right
   [index rotors]
-  (char-at (translate-r (translate-r (translate-r index (rotors 2)) (rotors 1)) (rotors 0)) raw-alphabet))
+  (char-at (translate-r (translate-r (translate-r index (rotors 2)) (rotors 1)) (rotors 0)) parts/raw-alphabet))
 
-(defn single-lap [char grounded-rotors]
-  (left-to-right (reflect (right-to-left char grounded-rotors)) grounded-rotors))
+(defn single-lap [char rotors]
+  (left-to-right (reflect (right-to-left char rotors)) rotors))
 
 (defn rotate? [rotor]
-  (= (first (rotor :alphabet)) (rotor :notch)))
+  (= (first (rotor :alphabet)) (rotor :notch))
+)
 
 (defn double-step-center [rotor]
   (if (rotate? rotor)
