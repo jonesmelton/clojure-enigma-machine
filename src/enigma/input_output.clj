@@ -1,6 +1,6 @@
 (ns enigma.input-output
   (:require [enigma.static-parts :as parts]
-            [enigma.rotor-ops :refer :all]))
+            [enigma.rotor-ops :as rotor]))
 
 (defn index-of [char wheel]
   (.indexOf wheel char))
@@ -45,21 +45,21 @@
 
 (defn double-step-center [rotor]
   (if (rotate? rotor)
-    (rotate-rotor rotor)
+    (rotor/rotate-rotor rotor)
     rotor))
 
 (defn step-center [rotors]
   (if (rotate? (rotors 0))
-    (rotate-rotor (rotors 1))
+    (rotor/rotate-rotor (rotors 1))
     (double-step-center (rotors 1))))
 
 (defn step-left [rotors]
   (if (rotate? (rotors 1))
-    (rotate-rotor (rotors 2))
+    (rotor/rotate-rotor (rotors 2))
     (rotors 2)))
 
 (defn step-right [rotors]
-  (rotate-rotor (rotors 0)))
+  (rotor/rotate-rotor (rotors 0)))
 
 (defn step [rotors]
   [(step-right rotors) (step-center rotors) (step-left rotors)])
