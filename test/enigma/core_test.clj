@@ -50,7 +50,10 @@
 
 (deftest full-translate-string
   (testing "encodes a string"
-    (is (= "OXRSFVU" (translate-string "ITWORKS" grounded-rotors)))))
+    (is (= "OXRSFVU" (translate-string "ITWORKS" grounded-rotors))))
+
+  (testing "decodes a string"
+    (is (= "ITWORKS" (translate-string (translate-string "ITWORKS" grounded-rotors) grounded-rotors)))))
 
 (deftest stepping-helpers
   (testing "rotate? returns false if rotor shouldn't rotate"
@@ -64,3 +67,16 @@
 
   (testing "double-steps"
     (is (= "TBGWIXNYEIVLWOQZHRSEPXXRLDIBYHISMXLMYJC" (translate-string "ASDFASDFASDFASDFASDFASDFASDFSDFDSFSDFFF" grounded-rotors)))))
+
+(deftest input-validator
+  (testing "ignores numbers"
+    (is (= "OXRSFVU" (translate-string "IT1W2O4R567743K7S990000033" grounded-rotors))))
+
+  (testing "ignores whitespace characaters"
+    (is (= "OXRSFVU" (translate-string " I T     W  O  RK  S      " grounded-rotors))))
+
+  (testing "ignores non-alphanumeric characters"
+    (is (= "OXRSFVU" (translate-string "I!@#$%^&*()--_=<>;/;TWORKS" grounded-rotors))))
+
+  (testing "ignores a mix of numbers, whitespace, and other character"
+    (is (= "OXRSFVU" (translate-string "I125 68  345 7 9:''[] TWO<   >??? RK !@~ ~``S   " grounded-rotors)))))
