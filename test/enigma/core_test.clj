@@ -79,4 +79,11 @@
     (is (= "OXRSFVU" (translate-string "I!@#$%^&*()--_=<>;/;TWORKS" grounded-rotors))))
 
   (testing "ignores a mix of numbers, whitespace, and other character"
-    (is (= "OXRSFVU" (translate-string "I125 68  345 7 9:''[] TWO<   >??? RK !@~ ~``S   " grounded-rotors)))))
+    (is (= "OXRSFVU" (translate-string "I125 68  345 7 9:''[] TWO<   >??? RK !@~ ~``S   " grounded-rotors))))
+
+  (testing ""
+    (is (= "OXRSFVU" (translate-string "itworks" grounded-rotors)))))
+
+(deftest rotor-window
+  (testing "returns the three characters in the three rotors' windows"
+    (is (= '(\N \N \K) (translate-rotor (apply str (repeat 10 "abcdefghijklmnopqrstuvwxyz")) grounded-rotors)))))
