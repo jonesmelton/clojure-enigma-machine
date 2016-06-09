@@ -5,7 +5,7 @@
 ; string -> string
 (defn validate-str
   [string]
-  (apply str (re-seq #"[a-zA-Z]" string)))
+  (clojure.string/upper-case (apply str (re-seq #"[a-zA-Z]" string))))
 
 (defn index-of [char wheel]
   (.indexOf wheel char))
@@ -68,3 +68,20 @@
 
 (defn step [rotors]
   [(step-right rotors) (step-center rotors) (step-left rotors)])
+
+(defn rotor-position
+  [rotors]
+  (reverse (map :alphabet rotors)))
+
+(defn rotor-windows
+  [wheel]
+  (map first (rotor-position wheel)))
+
+(defn translate-rotor [string rotatoes]
+  (loop [remaining-letters  (rest (validate-str string))
+         encoded-letters    []
+         rotors             (step rotatoes)]
+    (if-not (seq remaining-letters)
+      (rotor-windows rotors)
+      (let [[first-char & rest] remaining-letters]
+        (recur rest (conj encoded-letters (single-lap first-char rotors)) (step rotors))))))

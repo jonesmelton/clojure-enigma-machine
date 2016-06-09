@@ -14,5 +14,5 @@
 
 (defn -main
   [& rest]
-  (println (translate-string (clojure.string/upper-case (apply str rest)) parts/grounded-rotors ))
+  (println (translate-string (apply str rest) parts/grounded-rotors ))
   )
